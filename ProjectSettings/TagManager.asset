@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - World
+  - Slime
   layers:
   - Default
   - TransparentFX

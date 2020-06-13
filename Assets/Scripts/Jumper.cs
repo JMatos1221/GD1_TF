@@ -12,6 +12,7 @@ public class Jumper : MonoBehaviour
     Rigidbody2D rb;
     GameObject followTarget;
     Vector2 moveSpeed;
+    Vector3 diff;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -24,12 +25,9 @@ public class Jumper : MonoBehaviour
             if (FindObjectOfType<Player>()) followTarget = FindObjectOfType<Player>().gameObject;
         }
 
-        Vector3 diff = followTarget.transform.position - transform.position;
+        diff = followTarget.transform.position - transform.position;
 
-        if (Mathf.Sqrt(Mathf.Pow(diff.x, 2) + Mathf.Pow(diff.y, 2)) < sight)
-        {
-            follow = true;
-        }
+        if (Mathf.Sqrt(Mathf.Pow(diff.x, 2) + Mathf.Pow(diff.y, 2)) < sight) follow = true;
 
         else follow = false;
 
@@ -37,9 +35,9 @@ public class Jumper : MonoBehaviour
         {
             timer = 0;
 
-            if (diff.x > 32) speed = Mathf.Abs(speed);
+            if (diff.x > 16) speed = Mathf.Abs(speed);
 
-            else if (diff.x < -32) speed = -Mathf.Abs(speed);
+            else if (diff.x < -16) speed = -Mathf.Abs(speed);
         }
 
         else
@@ -72,7 +70,7 @@ public class Jumper : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("World"))
+        if (collision.CompareTag("World") && !follow)
         {
             speed = -speed;
             timer = 0f;

@@ -20,9 +20,7 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         if (followTarget == null)
-        {
             if (FindObjectOfType<Player>()) followTarget = FindObjectOfType<Player>().transform;
-        }
     }
 
     void FixedUpdate()

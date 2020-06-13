@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4883239108083643310}
   - component: {fileID: 4883239108083643309}
   - component: {fileID: 4883239108083643308}
-  - component: {fileID: 4883239108083643283}
   - component: {fileID: 4883239108083643304}
+  - component: {fileID: 4883239108083643283}
   m_Layer: 0
   m_Name: Runner
   m_TagString: Untagged
@@ -132,19 +132,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 16, y: 16}
   m_EdgeRadius: 0
---- !u!114 &4883239108083643283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4883239108083643282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f218ee3eebc78149ad75d6d1edf7894, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 250
 --- !u!70 &4883239108083643304
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -159,5 +146,18 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 18, y: 2}
+  m_Size: {x: 17, y: 2}
   m_Direction: 1
+--- !u!114 &4883239108083643283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4883239108083643282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f218ee3eebc78149ad75d6d1edf7894, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 250

@@ -4,13 +4,14 @@ public class Player : MonoBehaviour
 {
     float hAxis;
     [SerializeField]
-    float speed = 150f, jumpSpeed = 236f;
-    bool jump=false;
+    float speed, jumpSpeed = 236f, maxSpeed = 150f;
+    bool jump = false;
     Vector2 moveSpeed;
     Rigidbody2D rb;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        speed = maxSpeed;
     }
 
     // Update is called once per frame
@@ -32,5 +33,21 @@ public class Player : MonoBehaviour
         }
 
         rb.velocity = moveSpeed;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Slime"))
+        {
+            speed /= 2;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Slime"))
+        {
+            speed = maxSpeed;
+        }
     }
 }

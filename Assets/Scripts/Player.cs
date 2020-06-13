@@ -4,7 +4,7 @@ public class Player : MonoBehaviour
 {
     float hAxis;
     [SerializeField]
-    float speed = 150, jumpSpeed = 150;
+    float speed = 150f, jumpSpeed = 236f;
     bool jump=false;
     Vector2 moveSpeed;
     Rigidbody2D rb;

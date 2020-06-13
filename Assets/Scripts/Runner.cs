@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Runner : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField]
+    float speed = 250f;
+    Rigidbody2D rb;
+    Vector2 moveSpeed;
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        moveSpeed = new Vector2(speed, rb.velocity.y);
+        rb.velocity = moveSpeed;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("World")) speed = -speed;
     }
 }

@@ -1,18 +1,36 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
+    float hAxis;
+    [SerializeField]
+    float speed = 150, jumpSpeed = 150;
+    bool jump=false;
+    Vector2 moveSpeed;
+    Rigidbody2D rb;
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        hAxis = Input.GetAxisRaw("Horizontal");
+
+        if (Input.GetKeyDown(KeyCode.W)) jump = true;
+    }
+
+    void FixedUpdate()
+    {
+        moveSpeed = new Vector2(speed * hAxis, rb.velocity.y);
+
+        if (jump)
+        {
+            moveSpeed.y = jumpSpeed;
+            jump = false;
+        }
+
+        rb.velocity = moveSpeed;
     }
 }

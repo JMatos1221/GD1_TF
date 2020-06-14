@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3081869089396522359}
   m_Layer: 0
   m_Name: DeadJumper
-  m_TagString: Untagged
+  m_TagString: DeadBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -6,6 +6,7 @@ public class DeadSlimer : TimeScale
 {
     Rigidbody2D rb;
     float lastTimeSlow;
+    Vector3 moveSpeed;
 
     void Start()
     {
@@ -20,16 +21,18 @@ public class DeadSlimer : TimeScale
 
     void FixedUpdate()
     {
+        moveSpeed = rb.velocity;
+
         if (lastTimeSlow != TimeSlow)
         {
-            Vector2 moveSpeed = rb.velocity;
-
-            moveSpeed *= TimeSlow / lastTimeSlow;
-
-            rb.velocity = moveSpeed;
+            moveSpeed.x *= TimeSlow / lastTimeSlow;
 
             lastTimeSlow = TimeSlow;
         }
+
+        moveSpeed.y = Mathf.Clamp(moveSpeed.y, -120f * TimeSlow, 120f);
+
+        rb.velocity = moveSpeed;
     }
 
     void OnTriggerEnter2D(Collider2D collision)

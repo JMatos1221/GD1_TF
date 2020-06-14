@@ -66,10 +66,7 @@ public class Jumper : TimeScale
             jump = false;
         }
 
-        if (TimeSlow == 0.25f)
-        {
-            if (moveSpeed.y > 60f) moveSpeed.y = 60;
-        }
+        moveSpeed.y = Mathf.Clamp(moveSpeed.y, -jumpSpeed * Convert.ToSingle(Math.Pow(TimeSlow, 2)), jumpSpeed * TimeSlow * 2);
 
         rb.velocity = moveSpeed;
     }

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1750028208187924800}
   m_Layer: 0
   m_Name: DeadRunner
-  m_TagString: Untagged
+  m_TagString: DeadBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,7 +146,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 17, y: 2}
+  m_Size: {x: 18, y: 2}
   m_Direction: 1
 --- !u!114 &1750028208187924800
 MonoBehaviour:
@@ -160,4 +160,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0954b0dc27b7be4f82aafad783f7f2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 100

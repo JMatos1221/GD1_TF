@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class DeadRunner : TimeScale
 {
-    [SerializeField]
-    float maxSpeed = 100f;
     float lastTimeSlow;
+    Vector3 moveSpeed;
     Rigidbody2D rb;
 
     void Start()
@@ -23,15 +22,27 @@ public class DeadRunner : TimeScale
 
     void FixedUpdate()
     {
+        moveSpeed = rb.velocity;
+
         if (lastTimeSlow != TimeSlow)
         {
-            Vector2 moveSpeed = rb.velocity;
-
-            moveSpeed *= TimeSlow / lastTimeSlow;
-
-            rb.velocity = moveSpeed;
+            moveSpeed.x *= TimeSlow / lastTimeSlow;
 
             lastTimeSlow = TimeSlow;
+        }
+
+        moveSpeed.y = Mathf.Clamp(moveSpeed.y, -60f * TimeSlow, 120f);
+
+        rb.velocity = moveSpeed;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("World"))
+        {
+            float invertSpeed = -rb.velocity.x;
+
+            rb.velocity = new Vector2(invertSpeed, rb.velocity.y);
         }
     }
 }

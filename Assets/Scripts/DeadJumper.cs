@@ -7,6 +7,7 @@ public class DeadJumper : TimeScale
     [SerializeField]
     float jumpSpeed = 236f;
     float lastTimeSlow;
+    Vector2 moveSpeed;
     Rigidbody2D rb, colRB;
 
     void Start()
@@ -22,16 +23,18 @@ public class DeadJumper : TimeScale
 
     void FixedUpdate()
     {
+        moveSpeed = rb.velocity;
+
         if (lastTimeSlow != TimeSlow)
         {
-            Vector2 moveSpeed = rb.velocity;
-
-            moveSpeed *= TimeSlow / lastTimeSlow;
-
-            rb.velocity = moveSpeed;
+            moveSpeed.x *= TimeSlow / lastTimeSlow;
 
             lastTimeSlow = TimeSlow;
         }
+
+        moveSpeed.y = Mathf.Clamp(moveSpeed.y, -120f * TimeSlow, 120f);
+
+        rb.velocity = moveSpeed;
     }
 
     void OnTriggerEnter2D(Collider2D collision)

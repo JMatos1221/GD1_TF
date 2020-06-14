@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     Vector3 moveDistance;
     [SerializeField]
     float movePercentage = 0.1f;
-    float xPos = 0f, yPos = 58f, zPos = -10f;
+    float xPos = 80f, yPos = 0f, zPos = -10f;
 
     void Start()
     {

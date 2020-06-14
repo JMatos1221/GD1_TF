@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Jumper : MonoBehaviour
+public class Jumper : TimeScale
 {
     [SerializeField]
-    float speed = 100f, jumpSpeed = 125f, travelDistance = 64f, sight = 64f;
+    float speed = 100f, jumpSpeed = 120f, travelDistance = 64f, sight = 64f;
     float timer = 0f;
     bool jump = false, follow = false;
     Rigidbody2D rb;
@@ -42,7 +42,7 @@ public class Jumper : MonoBehaviour
 
         else
         {
-            timer += Time.deltaTime;
+            timer += Time.deltaTime * TimeSlow;
 
             if (timer > travelDistance / Mathf.Abs(speed))
             {
@@ -51,12 +51,14 @@ public class Jumper : MonoBehaviour
             }
         }
 
-        if (rb.velocity.y > -0.5f && rb.velocity.y < 0.5f) jump = true;
+        if (rb.velocity.y > -0.1f && rb.velocity.y < 0.1f) jump = true;
+
+        rb.gravityScale = TimeSlow;
     }
 
     void FixedUpdate()
     {
-        moveSpeed = new Vector2(speed, rb.velocity.y);
+        moveSpeed = new Vector2(speed * TimeSlow, rb.velocity.y);
 
         if (jump)
         {
@@ -64,6 +66,10 @@ public class Jumper : MonoBehaviour
             jump = false;
         }
 
+        if (TimeSlow == 0.25f)
+        {
+            if (moveSpeed.y > 60f) moveSpeed.y = 60;
+        }
 
         rb.velocity = moveSpeed;
     }

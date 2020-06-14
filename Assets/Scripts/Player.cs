@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : TimeScale
 {
     float hAxis;
     [SerializeField]
@@ -19,7 +19,15 @@ public class Player : MonoBehaviour
     {
         hAxis = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.W)) jump = true;
+        if (Input.GetKeyDown(KeyCode.W) && rb.velocity.y > -0.5f && rb.velocity.y < 0.5) 
+            jump = true;
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            if (TimeSlow == 1) TimeSlow = 0.25f;
+
+            else TimeSlow = 1;
+        }
     }
 
     void FixedUpdate()

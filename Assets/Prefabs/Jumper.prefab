@@ -161,6 +161,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 100
-  jumpSpeed: 125
+  jumpSpeed: 120
   travelDistance: 64
   sight: 64

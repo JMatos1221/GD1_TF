@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slimer : MonoBehaviour
+public class Slimer : TimeScale
 {
     Rigidbody2D rb;
     Vector2 moveSpeed;
@@ -49,11 +49,13 @@ public class Slimer : MonoBehaviour
 
             timer = 0;
         }
+
+        rb.gravityScale = TimeSlow;
     }
 
     void FixedUpdate()
     {
-        moveSpeed = new Vector2(follow ? 3 * speed : speed, rb.velocity.y);
+        moveSpeed = new Vector2((follow ? 3 * speed : speed) * TimeSlow, rb.velocity.y);
 
         rb.velocity = moveSpeed;
     }

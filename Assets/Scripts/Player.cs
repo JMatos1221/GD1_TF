@@ -6,7 +6,7 @@ public class Player : TimeScale
     float hAxis;
     [SerializeField]
     float speed, jumpSpeed = 236f, maxSpeed = 150f, throwSpeed = 300f;
-    float energy, maxEnergy = 100f, energyDrain = 10f;
+    float energy, maxEnergy = 100f, energyDrain = 20f;
     bool jump = false, canJump = false, slowTime = false;
     Vector2 moveSpeed;
     Rigidbody2D rb;
@@ -35,7 +35,8 @@ public class Player : TimeScale
 
         if (Input.GetKeyDown(KeyCode.LeftArrow) && energy > 0)
         {
-            TimeSlow = 0.1f;
+            if (TimeSlow == 1f) TimeSlow = 0.1f;
+            else TimeSlow = 1f;
 
             slowTime = !slowTime;
         }
@@ -54,6 +55,9 @@ public class Player : TimeScale
         {
             if (transform.childCount > 0)
             {
+                transform.GetChild(0).GetComponent<Rigidbody2D>().velocity =
+                    new Vector2(0f, 0f);
+
                 transform.GetChild(0).GetComponent<Rigidbody2D>().mass = 9000f;
 
                 transform.GetChild(0).SetParent(null);
@@ -89,10 +93,10 @@ public class Player : TimeScale
                 slowTime = false;
             }
         }
-        
+
         else if (energy < 100)
         {
-            energy += Time.deltaTime * 1f;
+            energy += Time.deltaTime * 10f;
         }
 
         energyBar.fillAmount = energy / 100f;
@@ -149,6 +153,8 @@ public class Player : TimeScale
         if (collision.gameObject.CompareTag("DeadBlock"))
         {
             if (collision.gameObject == pickBlock) pickBlock = null;
+
+            canJump = false;
         }
     }
 }

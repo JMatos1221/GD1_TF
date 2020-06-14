@@ -32,7 +32,21 @@ public class Runner : TimeScale
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (collision.transform.position.y - transform.position.y < 24) Destroy(collision.gameObject);
+            if (collision.transform.position.y - transform.position.y < 24)
+            {
+                if (collision.transform.childCount > 0)
+                {
+                    Rigidbody2D block = collision.transform.GetChild(0).GetComponent<Rigidbody2D>();
+
+                    block.mass = 9000f;
+
+                    block.velocity = new Vector2(0f, 0f);
+
+                    collision.transform.GetChild(0).SetParent(null);
+                }
+
+                Destroy(collision.gameObject);
+            }
         }
     }
 

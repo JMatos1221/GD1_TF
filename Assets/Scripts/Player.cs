@@ -1,19 +1,24 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : TimeScale
 {
     float hAxis;
     [SerializeField]
     float speed, jumpSpeed = 236f, maxSpeed = 150f, throwSpeed = 300f;
-    bool jump = false, canJump = false;
+    float energy, maxEnergy = 100f, energyDrain = 10f;
+    bool jump = false, canJump = false, slowTime = false;
     Vector2 moveSpeed;
     Rigidbody2D rb;
     GameObject pickBlock;
+    Image energyBar;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         speed = maxSpeed;
+        energy = maxEnergy;
+        energyBar = GameObject.Find("EnergyBar").GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -28,11 +33,11 @@ public class Player : TimeScale
         }
 
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && energy > 0)
         {
-            if (TimeSlow == 1) TimeSlow = 0.1f;
+            TimeSlow = 0.1f;
 
-            else TimeSlow = 1;
+            slowTime = !slowTime;
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -73,6 +78,24 @@ public class Player : TimeScale
                 }
             }
         }
+
+        if (slowTime)
+        {
+            energy -= Time.deltaTime * energyDrain;
+
+            if (energy <= 0)
+            {
+                TimeSlow = 1f;
+                slowTime = false;
+            }
+        }
+        
+        else if (energy < 100)
+        {
+            energy += Time.deltaTime * 1f;
+        }
+
+        energyBar.fillAmount = energy / 100f;
 
         if (transform.childCount > 0)
         {

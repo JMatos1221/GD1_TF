@@ -14,7 +14,7 @@ public class Slimer : TimeScale
     Vector3 diff, slimeOffset;
     [SerializeField]
     GameObject slime;
-
+    public bool Alive { get; set; } = true;
 
     void Start()
     {
@@ -58,6 +58,18 @@ public class Slimer : TimeScale
         moveSpeed = new Vector2((follow ? 3 * speed : speed) * TimeSlow, rb.velocity.y);
 
         rb.velocity = moveSpeed;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (collision.transform.position.y - transform.position.y < 24)
+            {
+                Destroy(collision.gameObject);
+                follow = false;
+            }
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)

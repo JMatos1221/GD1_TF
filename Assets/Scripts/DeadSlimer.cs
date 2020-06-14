@@ -5,7 +5,7 @@ using UnityEngine;
 public class DeadSlimer : TimeScale
 {
     Rigidbody2D rb;
-    float lastTimeSlow;
+    float lastTimeSlow, slippingWall = 1f;
     Vector3 moveSpeed;
 
     void Start()
@@ -16,7 +16,7 @@ public class DeadSlimer : TimeScale
 
     void Update()
     {
-        rb.gravityScale = TimeSlow;
+        rb.gravityScale = TimeSlow * slippingWall;
     }
 
     void FixedUpdate()
@@ -37,11 +37,11 @@ public class DeadSlimer : TimeScale
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("World")) rb.gravityScale *= 0.5f;
+        if (collision.CompareTag("World")) slippingWall = 0.1f;
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("World")) rb.gravityScale *= 2f;
+        if (collision.CompareTag("World")) slippingWall = 1f;
     }
 }

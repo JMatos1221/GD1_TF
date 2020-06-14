@@ -12,7 +12,12 @@ public class KillEnemy : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Destroy(transform.parent.gameObject);
+
             Instantiate(DeadEnemy, transform.parent.position, Quaternion.identity);
+
+            Rigidbody2D colRB = collision.GetComponent<Rigidbody2D>();
+
+            colRB.velocity = new Vector2(colRB.velocity.x, 125f);
         }
     }
 }

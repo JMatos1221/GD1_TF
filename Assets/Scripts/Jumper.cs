@@ -13,6 +13,8 @@ public class Jumper : TimeScale
     GameObject followTarget;
     Vector2 moveSpeed;
     Vector3 diff;
+    public bool Alive { get; set; } = true;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -23,25 +25,7 @@ public class Jumper : TimeScale
         if (followTarget == null)
         {
             if (FindObjectOfType<Player>()) followTarget = FindObjectOfType<Player>().gameObject;
-        }
 
-        diff = followTarget.transform.position - transform.position;
-
-        if (Mathf.Sqrt(Mathf.Pow(diff.x, 2) + Mathf.Pow(diff.y, 2)) < sight) follow = true;
-
-        else follow = false;
-
-        if (follow)
-        {
-            timer = 0;
-
-            if (diff.x > 16) speed = Mathf.Abs(speed);
-
-            else if (diff.x < -16) speed = -Mathf.Abs(speed);
-        }
-
-        else
-        {
             timer += Time.deltaTime * TimeSlow;
 
             if (timer > travelDistance / Mathf.Abs(speed))
@@ -49,11 +33,42 @@ public class Jumper : TimeScale
                 speed = -speed;
                 timer = 0f;
             }
+
+            if (rb.velocity.y > -0.1f && rb.velocity.y < 0.1f) jump = true;
         }
 
-        if (rb.velocity.y > -0.1f && rb.velocity.y < 0.1f) jump = true;
+        else
+        {
+            diff = followTarget.transform.position - transform.position;
 
-        rb.gravityScale = TimeSlow;
+            if (Mathf.Sqrt(Mathf.Pow(diff.x, 2) + Mathf.Pow(diff.y, 2)) < sight) follow = true;
+
+            else follow = false;
+
+            if (follow)
+            {
+                timer = 0;
+
+                if (diff.x > 16) speed = Mathf.Abs(speed);
+
+                else if (diff.x < -16) speed = -Mathf.Abs(speed);
+            }
+
+            else
+            {
+                timer += Time.deltaTime * TimeSlow;
+
+                if (timer > travelDistance / Mathf.Abs(speed))
+                {
+                    speed = -speed;
+                    timer = 0f;
+                }
+            }
+
+            if (rb.velocity.y > -0.1f && rb.velocity.y < 0.1f) jump = true;
+
+            rb.gravityScale = TimeSlow;
+        }
     }
 
     void FixedUpdate()
@@ -69,6 +84,14 @@ public class Jumper : TimeScale
         moveSpeed.y = Mathf.Clamp(moveSpeed.y, -jumpSpeed * Convert.ToSingle(Math.Pow(TimeSlow, 2)), jumpSpeed * TimeSlow * 2);
 
         rb.velocity = moveSpeed;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (collision.transform.position.y - transform.position.y < 24) Destroy(collision.gameObject);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)

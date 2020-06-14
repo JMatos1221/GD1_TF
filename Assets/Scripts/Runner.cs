@@ -9,6 +9,8 @@ public class Runner : TimeScale
     float speed = 250f;
     Rigidbody2D rb;
     Vector2 moveSpeed;
+    public bool Alive { get; set; } = true;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -24,6 +26,14 @@ public class Runner : TimeScale
         moveSpeed = new Vector2(speed * TimeSlow, rb.velocity.y);
 
         rb.velocity = moveSpeed;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (collision.transform.position.y - transform.position.y < 24) Destroy(collision.gameObject);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)

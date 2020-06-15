@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Player : TimeScale
@@ -35,10 +36,10 @@ public class Player : TimeScale
 
         if (Input.GetKeyDown(KeyCode.LeftArrow) && energy > 0)
         {
-            if (TimeSlow == 1f) TimeSlow = 0.1f;
-            else TimeSlow = 1f;
-
             slowTime = !slowTime;
+
+            if (slowTime) TimeSlow = 0.1f;
+            else TimeSlow = 1f;
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -81,6 +82,15 @@ public class Player : TimeScale
                     throwRB.mass = 9000;
                 }
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene("MenuScene");
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (Time.timeScale == 1) Time.timeScale = 0;
+
+            else Time.timeScale = 1;
         }
 
         if (slowTime)

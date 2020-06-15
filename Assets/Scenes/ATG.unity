@@ -1327,16 +1327,17 @@ MonoBehaviour:
   m_Text: "Usa A e D para te moveres para os lados\r\nUsa W para saltar\r\nPressiona
     continuamente Espa\xE7o para levar um bloco\r\nUsa a Seta Direita enquanto tiveres
     um bloco na m\xE3o para o atirar para a direita\r\nUsa a Seta Esquerda para ativar
-    a tua habilidade temporal\r\n\r\nA tua habilidade temporal abranda o tempo em
-    90% e usa energia que \xE9 regenerada enquanto a habilidade n\xE3o est\xE1 ativa\r\n\r\nO
-    Runner corre de um lado para o outro a alta velocidade\r\nO Jumper est\xE1 sempre
-    aos saltos de um lado para o outro numa \xE1rea mas segue-te caso estejas pr\xF3ximo
-    dele\r\nO Slimer anda lentamente de uma lado para o outro e deixa um rasto de
-    slime, caso pises ficas lento e ele segue-te at\xE9 ser morto\r\n\r\nInimigos
-    que mates podem tornam-se blocos que podem ser usados para chegares aos teus
-    objetivos, o Runner faz ricochete nas paredes e cai mais devagar, o Jumper \xE9
-    usado como trampolim, fazendo te saltar ainda mais alto e o Slimer escorrega
-    lentamente quando entra em contacto com uma parede\r\n\r\nBoa Sorte!"
+    a tua habilidade temporal\r\nUsa P para pausar e resumir o jogo\n\r\nA tua habilidade
+    temporal abranda o tempo em 90% e usa energia que \xE9 regenerada enquanto a
+    habilidade n\xE3o est\xE1 ativa\r\n\r\nO Runner corre de um lado para o outro
+    a alta velocidade\r\nO Jumper est\xE1 sempre aos saltos de um lado para o outro
+    numa \xE1rea mas segue-te caso estejas pr\xF3ximo dele\r\nO Slimer anda lentamente
+    de uma lado para o outro e deixa um rasto de slime, caso pises ficas lento e
+    ele segue-te at\xE9 ser morto\r\n\r\nInimigos que mates podem tornam-se blocos
+    que podem ser usados para chegares aos teus objetivos, o Runner faz ricochete
+    nas paredes e cai mais devagar, o Jumper \xE9 usado como trampolim, fazendo te
+    saltar ainda mais alto e o Slimer escorrega lentamente quando entra em contacto
+    com uma parede\r\n\r\nBoa Sorte!"
 --- !u!222 &1149077477
 CanvasRenderer:
   m_ObjectHideFlags: 0
